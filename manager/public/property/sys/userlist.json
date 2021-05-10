@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "message": "操作成功",
+  "timestamp": 16116,
+  "code": 200,
+  "result": {
+    "current": 1,
+    "orders": [],
+    "page": 1,
+    "total": 16,
+    "size": 5,
+    "searchCount": true,
+    "records|10-10": [{
+      "activitiSync": 1,
+      "avatar": "@image('200x100', '#50B347', '#FFF', 'ZS')",
+      "realname": "@cname",
+      "birthday": "@datetime",
+      "createTime": "@datetime",
+      "departIds": "@id",
+      "departIds_dictText": "技术部",
+      "email": "@email",
+      "post": "普通员工",
+      "sex": "@integer(1, 2)",
+      "sex_dictText": "@cword('男女', 1, 1)",
+      "status": "@integer(1, 2)",
+      "status_dictText": "@pick(['正常', '冻结'])",
+      "username": "@word(3, 5)",
+      "workNo": "@integer(1000,10000)",
+      "templateName": "@cword(4,7)",
+      "templateImage": "@image('200x400', '#50B347', '#FFF', '模板')"
+    }]
+  }
+}

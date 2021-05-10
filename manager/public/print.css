@@ -1,0 +1,21 @@
+h1 {
+  padding: 20px 0;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bolder;
+}
+.text-left {
+  text-align: left;
+}
+.p-indent {
+  text-indent: 30px;
+}
+p.flex {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+}
+.remark {
+  text-align: right;
+  padding: 100px 60px 60px 60px;
+}

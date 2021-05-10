@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "message": "操作成功",
+  "timestamp": 16116,
+  "code": 200,
+  "result|10-10": [{
+    "children|1-4": [{
+      "key": "@id",
+      "departName": "@cword(3,5)",
+      "key": "@id",
+      "orgType": "@cword(3,5)",
+      "orgCode": "@integer(1000,9999)",
+      "address": "@county(true)",
+      "departOrder": "@integer(1,20)"
+    }],
+    "key": "@id",
+    "departName": "@cword(3,5)",
+    "key": "@id",
+    "orgType": "@cword(3,5)",
+    "orgCode": "@integer(1000,9999)",
+    "address": "@county(true)",
+    "departOrder": "@integer(1,20)"
+  }]
+
+}

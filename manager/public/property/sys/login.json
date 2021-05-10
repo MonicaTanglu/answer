@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "message": "操作成功",
+  "timestamp": 16116,
+  "code": 200,
+  "result": {
+    "token": "@string(7, 20)",
+    "userInfo": {
+      "avatar": "@image('200x100', '#50B347', '#FFF', 'ZS')",
+      "realname": "@cname"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "message": "操作成功",
+  "timestamp": 16116,
+  "code": 200,
+  "result|10-10": [{
+    "children|1-4": [{
+      "icon": "@word(7)",
+      "isLeaf": "@boolean",
+      "key": "@id",
+      "parentId": "@id",
+      "label": "@cword(3,5)",
+      "title": "@cword(3,5)",
+      "value": "@id",
+      "name": "@cword(3,5)",
+      "key": "@id",
+      "menuType": "@pick(['菜单', '按钮/权限'])",
+      "component": "dashboard/index",
+      "url": "/app/index",
+      "sortNo": "@integer(1,20)"
+    }],
+    "icon": "@word(7)",
+    "isLeaf": "@boolean",
+    "key": "@id",
+    "parentId": "@id",
+    "label": "@cword(3,5)",
+    "title": "@cword(3,5)",
+    "value": "@id",
+    "name": "@cword(3,5)",
+    "key": "@id",
+    "menuType": "@pick(['菜单', '按钮/权限'])",
+    "component": "dashboard/index",
+    "url": "/app/index",
+    "sortNo": "@integer(1,20)"
+  }]
+
+}

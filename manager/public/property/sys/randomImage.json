@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "message": "操作成功",
+  "timestamp": 16116,
+  "code": 200,
+  "result": "@image('105x35', '#50B347', '#FFF', 'ab12')"
+}

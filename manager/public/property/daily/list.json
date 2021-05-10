@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "message": "操作成功",
+  "timestamp": 16116,
+  "code": 200,
+  "result": {
+    "current": 1,
+    "orders": [],
+    "page": 1,
+    "total": 16,
+    "size": 5,
+    "searchCount": true,
+    "records|10-10": [{
+      "number": "@integer(10000,99999)",
+      "overtime": "@cword(3,5)",
+      "power": "@cname",
+      "powerIdCard": "@guid",
+      "applyer": "@cname",
+      "address": "@region",
+      "area": "@integer(60, 100)",
+      "qlxz": "@cword(4,7)",
+      "uses": "@cword(5,7)",
+      "id": "@id",
+      "bdcqdyh": "@word(8,12)",
+      "currentNode": "@pick(['受理','初审','审核'])",
+      "flowStatus": "@pick(['待领取','待提交'])"
+    }]
+  }
+}

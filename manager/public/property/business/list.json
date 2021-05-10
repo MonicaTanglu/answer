@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "message": "操作成功",
+  "timestamp": 16116,
+  "code": 200,
+  "result": {
+    "current": 1,
+    "orders": [],
+    "page": 1,
+    "total": 16,
+    "size": 5,
+    "searchCount": true,
+    "records|10-10": [{
+      "createBy": "@cname",
+      "createTime": "@datetime",
+      "applyUser": "@cname",
+      "contactUser": "@cname",
+      "contactPhone": "@integer(10000, 99999)",
+      "id": "@id",
+      "address": "@region",
+      "status": "@pick(['处理中','材料补齐中'])",
+      "updateTime": "@datetime"
+    }]
+  }
+}
