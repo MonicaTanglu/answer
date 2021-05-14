@@ -10,7 +10,8 @@ export default {
 		},
 	}, {
 		title: '标题',
-		dataIndex: 'title'
+		dataIndex: 'title',
+		slots: { customRender: 'title' },
 	}, {
 		title: '分类',
 		dataIndex: 'category'

@@ -48,6 +48,7 @@
         :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
         @change="handleTableChange"
       >
+        <template #title="{record}">{{$filters.ellipsis(record.title,30)}}</template>
         <template #action="{record}">
           <a-button type="primary" size="small" @click="edit(record)">编辑</a-button>
           <a-button type="danger" size="small" class="m-l-10" @click="remove(record)">删除</a-button>
