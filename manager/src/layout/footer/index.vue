@@ -10,8 +10,8 @@
     </div>-->
     <div class='copyright'>
       Copyright
-      <a-icon type='copyright' />2020
-      <span>江西中煤勘测规划设计院 出品</span>
+      <!-- <a-icon type='copyright' />2020
+      <span>江西中煤勘测规划设计院 出品</span>-->
     </div>
   </div>
 </template>
@@ -24,23 +24,23 @@ export default {
 
 <style lang="sass" scoped>
 .footer
-	padding: 0 16px
-	margin: 48px 0 24px
-	text-align: center
+  padding: 0 16px
+  margin: 48px 0 24px
+  text-align: center
 
-	.links
-		margin-bottom: 8px
+  .links
+    margin-bottom: 8px
 
-		a
-			color: rgba(0, 0, 0, 0.45)
+    a
+      color: rgba(0, 0, 0, 0.45)
 
-			&:hover
-				color: rgba(0, 0, 0, 0.65)
+      &:hover
+        color: rgba(0, 0, 0, 0.65)
 
-			&:not(:last-child)
-				margin-right: 40px
+      &:not(:last-child)
+        margin-right: 40px
 
-	.copyright
-		color: rgba(0, 0, 0, 0.45)
-		font-size: 14px
+  .copyright
+    color: rgba(0, 0, 0, 0.45)
+    font-size: 14px
 </style>

@@ -1,59 +1,54 @@
 <template>
-  <div class='login-box'>
-    <div class='login-logo'>
+  <div class="login-box">
+    <div class="login-logo">
       <!-- <svg-icon icon-class='logo' /> -->
       <!--      <img src="~@/assets/images/logo.png" alt="">-->
       <h1>答题管理系统</h1>
     </div>
-    <a-form ref='ruleForm' layout='horizontal' :rule='rule' :model='formInline' @finish='handleSubmit'>
+    <a-form ref="ruleForm" layout="horizontal" :rule="rule" :model="formInline" @finish="handleSubmit">
       <a-form-item>
-        <a-input v-model:value='formInline.username' size='large' placeholder='admin'>
+        <a-input v-model:value="formInline.username" size="large" placeholder="admin">
           <template v-slot:prefix>
-            <user-outlined type='user' />
+            <user-outlined type="user" />
           </template>
         </a-input>
       </a-form-item>
       <a-form-item>
         <a-input
-          v-model:value='formInline.password'
-          size='large'
-          type='password'
-          placeholder='请输入密码'
-          autocomplete='new-password'
+          v-model:value="formInline.password"
+          size="large"
+          type="password"
+          placeholder="请输入密码"
+          autocomplete="new-password"
         >
           <template v-slot:prefix>
-            <lock-outlined type='user' />
+            <lock-outlined type="user" />
           </template>
         </a-input>
       </a-form-item>
-      <!-- <a-form-item>
-        <div class='check-code'>
-          <div style='width: 250px'>
+      <a-form-item>
+        <div class="check-code">
+          <div style="width: 250px">
             <a-input
-              v-model:value='formInline.captcha'
-              style='width: 250px'
-              size='large'
-              type='text'
-              placeholder='请输入验证码'
+              v-model:value="formInline.captcha"
+              style="width: 250px"
+              size="large"
+              type="text"
+              placeholder="请输入验证码"
             >
               <template v-slot:prefix>
                 <smile-outlined />
               </template>
             </a-input>
           </div>
-          <div class='image-code'>
-            <img
-              v-if='requestCodeSuccess'
-              style='margin-top: 2px;'
-              :src='randCodeImage'
-              @click.stop='handleChangeCheckCode'
-            />
-            <img v-else style='margin-top: 2px;' src='../../assets/checkcode.png' @click.stop='handleChangeCheckCode' />
+          <div class="image-code">
+            <img src="/api/sys/captcha" ref="captcha" @click.stop="handleChangeCheckCode" />
+            <!-- <img v-else style="margin-top: 2px;" src="../../assets/checkcode.png" @click.stop="handleChangeCheckCode" /> -->
           </div>
         </div>
-      </a-form-item>-->
+      </a-form-item>
       <a-form-item>
-        <a-button type='primary' html-type='submit' size='large' :loading='loading' block>登录</a-button>
+        <a-button type="primary" html-type="submit" size="large" :loading="loading" block>登录</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -63,7 +58,7 @@
 import { defineComponent, reactive, toRefs } from 'vue'
 import { message } from 'ant-design-vue'
 import { apiModule } from '@/api/module'
-import { api } from '@/api/api'
+import api from '@/api/api.ts'
 import { UserOutlined, LockOutlined, SmileOutlined } from '@ant-design/icons-vue'
 // ~@/assets/logo.png
 // import { useRoute, useRouter } from "vue-router";
@@ -82,7 +77,7 @@ export default defineComponent({
       loading: false,
       requestCodeSuccess: false,
       randCodeImage: '',
-      formInline: { username: 'admin', password: '123456', captcha: 'ab12' },
+      formInline: { username: 'admin', password: '123456', captcha: '' },
       rule: {
         username: [{ required: true, message: '请输入账户名', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
@@ -102,27 +97,18 @@ export default defineComponent({
       // })
 
     }
-    const handleChangeCheckCode = async () => {
-      // const currdatetime = new Date().getTime()
-      const res: any = await api.get(`randomImage`, apiModule.sys)
-      if (res.success) {
-        state.randCodeImage = res.result
-        state.requestCodeSuccess = true
-      } else {
-        message.error(res.message)
-        state.requestCodeSuccess = false
-      }
-    }
-    handleChangeCheckCode()
+
     return {
       ...toRefs(state),
       handleSubmit,
-      handleChangeCheckCode
     }
   },
   methods: {
     handleSubmit2() {
       // console.log(this.$refs.ruleForm.validate, 'ruleForm')
+    },
+    handleChangeCheckCode() {
+      (this.$refs.captcha as InstanceType<typeof HTMLImageElement>).src = '/api/sys/captcha?_t=' + Date.now()
     }
   }
 })
@@ -136,7 +122,7 @@ export default defineComponent({
   padding-top: 240px;
   flex-direction: column;
   align-items: center;
-  background: url('~@/assets/login.svg');
+  background: url("~@/assets/login.svg");
   background-size: 100%;
 
   .login-logo {

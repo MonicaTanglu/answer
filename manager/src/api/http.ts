@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Modal, notification } from 'ant-design-vue'
+import { Modal, notification, message } from 'ant-design-vue'
 import store from '@/store'
 import setting from '@/defaultSetting'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
@@ -31,10 +31,23 @@ instance.interceptors.request.use(
     console.warn(error)
   }
 )
-
+const resultJudge = (data) => {
+  if (data.code === 500) {
+    message.error(data.message);
+    // notification.error({
+    //     message: "系统提示",
+    //     description: data.message,
+    //     duration: 4,
+    // });
+    return false;
+  } else {
+    return true;
+  }
+};
 instance.interceptors.response.use(
   (res) => {
-    return res.data
+    if (resultJudge(res.data)) return res.data;
+    else return false;
   },
   (error) => {
     let errMsg = ''
@@ -92,4 +105,5 @@ instance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+
 export default instance

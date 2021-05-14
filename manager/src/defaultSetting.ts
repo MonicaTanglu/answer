@@ -1,6 +1,6 @@
 const mapBaseOrigin = 'http://192.168.31.100:6080/'
 export default {
-  serverUrlPrefix: '/mock/600f80651e35b13b0c2ecaf5/property',
+  serverUrlPrefix: '/api',
   mapBaseOrigin: mapBaseOrigin,
   mapBaseUrl: `${mapBaseOrigin}arcgis/rest/services/NCX/`,
   esriCss: 'http://192.168.31.100:1569/arcgis_js_api/library/4.17/esri/css/main.css',

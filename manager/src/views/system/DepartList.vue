@@ -41,8 +41,8 @@
       </a-button>
       <a-button @click="batchDel" v-if="selectedRowKeys.length > 0" ghost type="primary">
         <template #icon>
-          <DeleteOutlined /> </template
-        >批量删除
+          <DeleteOutlined />
+        </template>批量删除
       </a-button>
     </div>
 
@@ -50,8 +50,7 @@
     <div>
       <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
         <i class="anticon anticon-info-circle ant-alert-icon"></i>已选择&nbsp;
-        <a style="font-weight: 600">{{ selectedRowKeys.length }}</a
-        >项&nbsp;&nbsp;
+        <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项&nbsp;&nbsp;
         <a style="margin-left: 24px" @click="onClearSelected">清空</a>
       </div>
 
@@ -99,7 +98,7 @@
 
 <script lang="ts">
 import getList from '@/mixins/mixin.ts'
-import { api } from '@/api/api'
+import api from '@/api/api.ts'
 import {
   DownOutlined,
   PlusOutlined,
@@ -178,7 +177,7 @@ export default defineComponent({
   methods: {
     async getDepatList() {
       this.loading = ref(true)
-      const res: any = await api.get(this.url.list, 'empty')
+      const res: any = await api.get(this.url.list)
       if (res.success) {
         const result = res.result
         for (let i = 0, l = result.length; i < l; i++) {
@@ -215,5 +214,5 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-@import '../../assets/sass/common.scss';
+@import "../../assets/sass/common.scss";
 </style>

@@ -33,15 +33,15 @@
       "prettyhtml": {
         "printWidth": 120,
         "semi": false,
-        "singleQuote": true
+        "singleQuote": false
       },
       "prettier": {
         "semi": false,
-        "singleQuote": true
+        "singleQuote": false
       },
       "vscode-typescript": {
         "semi": false,
-        "singleQuote": true,
+        "singleQuote": false,
         "comma": true
       }
     },

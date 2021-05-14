@@ -1,8 +1,8 @@
 <template>
-  <ALayoutHeader class='layout-header'>
-    <div class='left-options'>
-      <span @click='() => $emit("update:collapsed", !collapsed)' class='menu-fold'>
-        <component :is='collapsed ? "menu-unfold-outlined" : "menu-fold-outlined"' />
+  <ALayoutHeader class="layout-header">
+    <div class="left-options">
+      <span @click="() => $emit('update:collapsed', !collapsed)" class="menu-fold">
+        <component :is="collapsed ? 'menu-unfold-outlined' : 'menu-fold-outlined'" />
       </span>
       <!-- <a-breadcrumb>
         <template v-for='routeItem in route.matched' :key='routeItem.name'>
@@ -21,27 +21,27 @@
         </template>
       </a-breadcrumb>-->
     </div>
-    <div class='right-options'>
-      <template v-for='item in iconList' :key='item.icon.name'>
-        <a-tooltip placement='bottom'>
+    <div class="right-options">
+      <template v-for="item in iconList" :key="item.icon.name">
+        <a-tooltip placement="bottom">
           <template #title>
             <span>{{ item.tips }}</span>
           </template>
-          <component v-on='item.eventObject || {}' :is='item.icon' />
+          <component v-on="item.eventObject || {}" :is="item.icon" />
         </a-tooltip>
       </template>
       <!--      切换全屏-->
-      <component :is='fullscreenIcon' @click='toggleFullScreen' />
+      <component :is="fullscreenIcon" @click="toggleFullScreen" />
       <Dropdown>
         <a-avatar>{{ username }}</a-avatar>
         <template v-slot:overlay>
           <a-menu>
             <a-menu-item>
-              <a href='javascript:;'>个人中心</a>
+              <a href="javascript:;">个人中心</a>
             </a-menu-item>
             <a-menu-divider />
             <a-menu-item>
-              <a @click.prevent='doLogout'>
+              <a @click.prevent="doLogout">
                 <poweroff-outlined />退出登录
               </a>
             </a-menu-item>
@@ -59,7 +59,7 @@ import components from "@/layout/header/components";
 import { message, Modal } from 'ant-design-vue'
 import { QuestionCircleOutlined } from '@ant-design/icons-vue'
 // import { useStore } from 'vuex'
-import { TABS_ROUTES } from "@/store/mutation-types";
+import { ACCESS_TOKEN, TABS_ROUTES } from "@/store/mutation-types";
 
 export default defineComponent({
   name: "PageHeader",
@@ -77,39 +77,8 @@ export default defineComponent({
       fullscreenIcon: 'FullscreenOutlined'
     })
 
-    const router = useRouter()
     const route = useRoute()
 
-    // 退出登录
-    const doLogout = () => {
-      Modal.confirm({
-        title: '您确定要退出登录吗？',
-        icon: createVNode(QuestionCircleOutlined),
-        onOk: () => {
-          message.success('成功退出登录')
-          // 移除标签页
-          localStorage.removeItem(TABS_ROUTES)
-          router.replace({
-            name: 'login',
-            query: {
-              redirect: route.fullPath
-            }
-            // logout({})
-            // store.dispatch('user/Logout').then(() => {
-            //   message.success('成功退出登录')
-            //   // 移除标签页
-            //   localStorage.removeItem(TABS_ROUTES)
-            //   router.replace({
-            //     name: 'login',
-            //     query: {
-            //       redirect: route.fullPath
-            //     }
-            //   }).finally(() => location.reload())
-            // })
-          })
-        }
-      })
-    }
 
     // 切换全屏图标
     const toggleFullscreenIcon = () => (state.fullscreenIcon = document.fullscreenElement !== null ? 'FullscreenExitOutlined' : 'FullscreenOutlined')
@@ -130,36 +99,31 @@ export default defineComponent({
 
     // 图标列表
     const iconList = [
-      // {
-      //   icon: 'SearchOutlined',
-      //   tips: '搜索'
-      // },
-      // {
-      //   icon: 'GithubOutlined',
-      //   tips: 'github',
-      //   eventObject: {
-      //     click: () => window.open('https://github.com/buqiyuan/vue3-antd')
-      //   }
-      // },
-      // {
-      //   icon: 'SettingOutlined',
-      //   tips: '网站设置'
-      // },
-      // {
-      //   icon: 'LockOutlined',
-      //   tips: '锁屏',
-      //   eventObject: {
-      //     click: () => store.commit('lockscreen/setLock', true)
-      //   }
-      // },
     ]
 
     return {
       ...toRefs(state),
       iconList,
       toggleFullScreen,
-      doLogout,
       route
+    }
+  },
+  methods: {
+    doLogout() {
+      const that = this
+      Modal.confirm({
+        title: '您确定要退出登录吗？',
+        icon: createVNode(QuestionCircleOutlined),
+        onOk: () => {
+          message.success('成功退出登录')
+          // 移除标签页
+          localStorage.removeItem(TABS_ROUTES)
+          localStorage.removeItem(ACCESS_TOKEN)
+          localStorage.removeItem('USERINFO')
+          debugger
+          that.$router.replace('/login')
+        }
+      })
     }
   }
 })

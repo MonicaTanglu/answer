@@ -2,7 +2,7 @@
 import { createStorage } from '@/utils/storage'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { apiModule } from '@/api/module'
-import { api } from '@/api/api'
+import api from '@/api/api.ts'
 const storage = createStorage()
 const state = {
   token: storage.get(ACCESS_TOKEN)
@@ -20,15 +20,15 @@ const actions = {
   login({ commit }, userInfo) {
     return new Promise((resolve, reject) => {
       api
-        .post('login', apiModule.sys, userInfo)
+        .post('login', userInfo, apiModule.sys)
         .then((loginRes: any) => {
-          if (loginRes.success) {
-            commit('SET_TOKEN', loginRes.result.token)
-            storage.set('userInfo', loginRes.result.userInfo)
-            storage.set(ACCESS_TOKEN, loginRes.result.token)
-            resolve(loginRes)
-          }
+          // if (loginRes.code ===) {
+          commit('SET_TOKEN', loginRes.data.token)
+          storage.set('userInfo', loginRes.data.userInfo)
+          storage.set(ACCESS_TOKEN, loginRes.data.token)
           resolve(loginRes)
+          // }
+          // resolve(loginRes)
         })
         .catch((error) => {
           reject(error)

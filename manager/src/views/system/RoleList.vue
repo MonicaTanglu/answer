@@ -48,8 +48,7 @@
         <div>
           <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
             <i class="anticon anticon-info-circle ant-alert-icon"></i>已选择&nbsp;
-            <a style="font-weight: 600">{{ selectedRowKeys.length }}</a
-            >项&nbsp;&nbsp;
+            <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项&nbsp;&nbsp;
             <a style="margin-left: 24px" @click="onClearSelected">清空</a>
           </div>
 
@@ -103,10 +102,7 @@
     <a-col :span="rightSpan" class="right-table" v-if="rightSpan === 12">
       <a-card>
         <p style="text-align:right">
-          <label
-            style="display:inline-block;cursor:pointer;margin-bottom: 10px"
-            @click="closeRight"
-          >
+          <label style="display:inline-block;cursor:pointer;margin-bottom: 10px" @click="closeRight">
             <CloseCircleOutlined />
           </label>
         </p>
@@ -145,12 +141,8 @@
       @expand="onExpand"
     />
     <div class="drawer-bottom">
-      <a-button style="marginRight: 8px" @click="drawerVisible = false">
-        取消
-      </a-button>
-      <a-button type="primary" @click="drawerVisible = false">
-        保存
-      </a-button>
+      <a-button style="marginRight: 8px" @click="drawerVisible = false">取消</a-button>
+      <a-button type="primary" @click="drawerVisible = false">保存</a-button>
     </div>
   </a-drawer>
 </template>
@@ -166,7 +158,7 @@ import {
   CloseCircleOutlined
 } from '@ant-design/icons-vue'
 import { reactive, toRefs, defineComponent } from 'vue'
-import { api } from '@/api/api'
+import api from '@/api/api.ts'
 import { routes } from '@/router/index'
 export default defineComponent({
   name: 'RoleList',
@@ -294,14 +286,14 @@ export default defineComponent({
   methods: {
     getTreeData() {
       const menus = routes.find((item) => item.name === 'home').children
-      let arr = this.setTreeData(menus, [])
+      const arr = this.setTreeData(menus, [])
       this.treeData = arr
       console.log(arr, 'treeData')
     },
     setTreeData(list, arr) {
       for (let i = 0, l = list.length; i < l; i++) {
         if (list[i].hidden) continue
-        let obj = { title: '', key: '' }
+        const obj = { title: '', key: '' }
         obj['title'] = list[i].meta.title
         obj['key'] = list[i].name
         arr.push(obj)
@@ -314,7 +306,7 @@ export default defineComponent({
     },
     async getUserList() {
       this.userLoading = true
-      const res: any = await api.get(this.url.user, 'empty')
+      const res: any = await api.get(this.url.user)
       if (res.success) {
         const result = res.result
         this.userLoading = false
@@ -350,5 +342,5 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-@import '../../assets/sass/common.scss';
+@import "../../assets/sass/common.scss";
 </style>

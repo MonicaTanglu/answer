@@ -52,6 +52,11 @@ module.exports = {
                 target: "http://10.0.0.113:7300", // 请求本地 需要jeecg-boot后台项目
                 ws: false,
                 changeOrigin: true
+            },
+            "/api": {
+                target: "http://localhost:3000", // 请求本地 需要jeecg-boot后台项目
+                ws: false,
+                changeOrigin: true
             }
         }
     }

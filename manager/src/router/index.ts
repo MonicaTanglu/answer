@@ -29,6 +29,13 @@ export const routes: Array<any> = [
         meta: { title: '题库管理', icon: 'icon-detail' },
         component: () => import('@/views/question/question.vue')
       },
+      {
+        path: 'category',
+        name: 'category',
+        hidden: false,
+        meta: { title: '类型管理', icon: 'icon-detail' },
+        component: () => import('@/views/category/category.vue')
+      },
       // {
       //   path: 'system',
       //   name: 'system',

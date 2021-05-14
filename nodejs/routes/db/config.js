@@ -10,8 +10,8 @@ var pool = mysql.createPool({
 module.exports = {
     query: (sql, cb) => {
         pool.query(sql, function (error, results, field) {
-            if (error) throw error
-            cb(results)
+            if (error) cb({ code: 500, message: error.sqlMessage,data: '' })
+            cb({ code: 200, data: results,message: '' })
         })
     }
 }

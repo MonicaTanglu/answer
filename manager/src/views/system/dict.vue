@@ -1,32 +1,32 @@
 <template>
-  <a-row :gutter='[8, 0]'>
-    <a-col :span='leftSpan'>
-      <a-card :bordered='false'>
+  <a-row :gutter="[8, 0]">
+    <a-col :span="leftSpan">
+      <a-card :bordered="false">
         <!-- 查询区域 -->
 
-        <div class='table-page-search-wrapper'>
-          <a-form layout='inline' @keyup.enter='searchQuery'>
-            <a-row :gutter='24'>
-              <a-col :md='8' :sm='8'>
-                <a-form-item label='字典名称'>
-                  <a-input placeholder='输入字典名称' v-model='queryParam.roleName'></a-input>
+        <div class="table-page-search-wrapper">
+          <a-form layout="inline" @keyup.enter="searchQuery">
+            <a-row :gutter="24">
+              <a-col :md="8" :sm="8">
+                <a-form-item label="字典名称">
+                  <a-input placeholder="输入字典名称" v-model="queryParam.roleName"></a-input>
                 </a-form-item>
               </a-col>
-              <a-col :md='8' :sm='8'>
-                <a-form-item label='字典编码'>
-                  <a-input placeholder='输入字典编码' v-model='queryParam.roleName'></a-input>
+              <a-col :md="8" :sm="8">
+                <a-form-item label="字典编码">
+                  <a-input placeholder="输入字典编码" v-model="queryParam.roleName"></a-input>
                 </a-form-item>
               </a-col>
 
-              <a-col :md='8' :sm='24'>
-                <span style='float: left;overflow: hidden;' class='table-page-search-submitButtons'>
-                  <a-button type='primary' @click='searchQuery'>
+              <a-col :md="8" :sm="24">
+                <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+                  <a-button type="primary" @click="searchQuery">
                     <template #icon>
                       <SearchOutlined />
                     </template>
                     查询
                   </a-button>
-                  <a-button type='primary' @click='searchReset' style='margin-left: 8px'>
+                  <a-button type="primary" @click="searchReset" style="margin-left: 8px">
                     <template #icon>
                       <ReloadOutlined />
                     </template>
@@ -39,51 +39,51 @@
         </div>
 
         <!-- 操作按钮区域 -->
-        <div class='table-operator' style='border-top: 5px'>
+        <div class="table-operator" style="border-top: 5px">
           <!-- <button v-permission="{ action: 'user:add' }">测试</button> -->
-          <a-button @click='addDict' type='primary' class='m-r-10'>
+          <a-button @click="addDict" type="primary" class="m-r-10">
             <template #icon>
               <PlusOutlined />
             </template>
             添加字典
           </a-button>
-          <a-button v-if='selectedRowKeys.length > 0' type='danger' ghost>批量删除</a-button>
+          <a-button v-if="selectedRowKeys.length > 0" type="danger" ghost>批量删除</a-button>
         </div>
 
         <!-- table区域-begin -->
         <div>
-          <div class='ant-alert ant-alert-info' style='margin-bottom: 16px;'>
-            <i class='anticon anticon-info-circle ant-alert-icon'></i>已选择&nbsp;
-            <a style='font-weight: 600'>{{ selectedRowKeys.length }}</a>项&nbsp;&nbsp;
-            <a style='margin-left: 24px' @click='onClearSelected'>清空</a>
+          <div class="ant-alert ant-alert-info" style="margin-bottom: 16px;">
+            <i class="anticon anticon-info-circle ant-alert-icon"></i>已选择&nbsp;
+            <a style="font-weight: 600">{{ selectedRowKeys.length }}</a>项&nbsp;&nbsp;
+            <a style="margin-left: 24px" @click="onClearSelected">清空</a>
           </div>
 
           <a-table
-            ref='table'
+            ref="table"
             bordered
-            size='middle'
-            rowKey='id'
-            :columns='columns'
-            :dataSource='dataSource'
-            :pagination='ipagination'
-            :loading='loading'
-            :rowSelection='{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }'
-            @change='handleTableChange'
+            size="middle"
+            rowKey="id"
+            :columns="columns"
+            :dataSource="dataSource"
+            :pagination="ipagination"
+            :loading="loading"
+            :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
+            @change="handleTableChange"
           >
-            <template #avatar='{text}'>
-              <a-avatar :src='text'></a-avatar>
+            <template #avatar="{text}">
+              <a-avatar :src="text"></a-avatar>
             </template>
-            <template #action='{record}'>
-              <a @click='getList(record)'>
+            <template #action="{record}">
+              <a @click="getList(record)">
                 <SettingOutlined />字典项
               </a>
-              <a-divider type='vertical' />
-              <a @click='edit(record)'>
+              <a-divider type="vertical" />
+              <a @click="edit(record)">
                 <EditOutlined />编辑
               </a>
-              <a-divider type='vertical' />
-              <a-popconfirm title='确定删除吗?' @confirm='() => handleDelete(record.id)'>
-                <a type='link'>
+              <a-divider type="vertical" />
+              <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+                <a type="link">
                   <DeleteOutlined />删除
                 </a>
               </a-popconfirm>
@@ -93,37 +93,37 @@
       </a-card>
     </a-col>
 
-    <a-col :span='rightSpan' class='right-table' v-if='rightSpan === 12'>
+    <a-col :span="rightSpan" class="right-table" v-if="rightSpan === 12">
       <a-card>
-        <p style='text-align:right'>
-          <label style='display:inline-block;cursor:pointer;margin-bottom: 10px' @click='closeRight'>
+        <p style="text-align:right">
+          <label style="display:inline-block;cursor:pointer;margin-bottom: 10px" @click="closeRight">
             <CloseCircleOutlined />
           </label>
         </p>
-        <div class='scroll-right'>
-          <div class='table-page-search-wrapper'>
-            <a-form layout='inline' @keyup.enter='searchQuery'>
-              <a-row :gutter='24'>
-                <a-col :md='8' :sm='8'>
-                  <a-form-item label='字典项名称'>
-                    <a-input placeholder='输入字典项名称' v-model='queryParam.roleName'></a-input>
+        <div class="scroll-right">
+          <div class="table-page-search-wrapper">
+            <a-form layout="inline" @keyup.enter="searchQuery">
+              <a-row :gutter="24">
+                <a-col :md="8" :sm="8">
+                  <a-form-item label="字典项名称">
+                    <a-input placeholder="输入字典项名称" v-model="queryParam.roleName"></a-input>
                   </a-form-item>
                 </a-col>
-                <a-col :md='8' :sm='8'>
-                  <a-form-item label='字典项编码'>
-                    <a-input placeholder='输入字典项编码' v-model='queryParam.roleName'></a-input>
+                <a-col :md="8" :sm="8">
+                  <a-form-item label="字典项编码">
+                    <a-input placeholder="输入字典项编码" v-model="queryParam.roleName"></a-input>
                   </a-form-item>
                 </a-col>
 
-                <a-col :md='8' :sm='24'>
-                  <span style='float: left;overflow: hidden;' class='table-page-search-submitButtons'>
-                    <a-button type='primary' @click='searchQuery'>
+                <a-col :md="8" :sm="24">
+                  <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
+                    <a-button type="primary" @click="searchQuery">
                       <template #icon>
                         <SearchOutlined />
                       </template>
                       查询
                     </a-button>
-                    <a-button type='primary' @click='searchReset' style='margin-left: 8px'>
+                    <a-button type="primary" @click="searchReset" style="margin-left: 8px">
                       <template #icon>
                         <ReloadOutlined />
                       </template>
@@ -136,9 +136,9 @@
           </div>
 
           <!-- 操作按钮区域 -->
-          <div class='table-operator' style='border-top: 5px'>
+          <div class="table-operator" style="border-top: 5px">
             <!-- <button v-permission="{ action: 'user:add' }">测试</button> -->
-            <a-button @click='addDictItem' type='primary' class='m-r-10'>
+            <a-button @click="addDictItem" type="primary" class="m-r-10">
               <template #icon>
                 <PlusOutlined />
               </template>
@@ -148,20 +148,20 @@
           <div>
             <a-table
               bordered
-              size='middle'
-              rowKey='id'
-              :columns='userColumns'
-              :dataSource='userDataSource'
-              :pagination='false'
-              :loading='userLoading'
+              size="middle"
+              rowKey="id"
+              :columns="userColumns"
+              :dataSource="userDataSource"
+              :pagination="false"
+              :loading="userLoading"
             >
-              <template #action='{record}'>
-                <a @click='dictItemEdit(record)'>
+              <template #action="{record}">
+                <a @click="dictItemEdit(record)">
                   <EditOutlined />编辑
                 </a>
-                <a-divider type='vertical' />
-                <a-popconfirm title='确定删除吗?' @confirm='() => handleDelete(record.id)'>
-                  <a type='link'>
+                <a-divider type="vertical" />
+                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+                  <a type="link">
                     <DeleteOutlined />删除
                   </a>
                 </a-popconfirm>
@@ -172,12 +172,12 @@
       </a-card>
     </a-col>
   </a-row>
-  <a-modal v-model:visible='dictShow' :footer='null' :title='modalTitle'>
-    <custom-form ref='dictForm' :formArr='dictFormArr'></custom-form>
+  <a-modal v-model:visible="dictShow" :footer="null" :title="modalTitle">
+    <custom-form ref="dictForm" :formArr="dictFormArr"></custom-form>
   </a-modal>
 
-  <a-modal v-model:visible='dictItemShow' :footer='null' :title='modalTitle'>
-    <custom-form ref='dictItemForm' :formArr='dictItemFormArr'></custom-form>
+  <a-modal v-model:visible="dictItemShow" :footer="null" :title="modalTitle">
+    <custom-form ref="dictItemForm" :formArr="dictItemFormArr"></custom-form>
   </a-modal>
 </template>
 
@@ -195,7 +195,7 @@ import {
   DeleteOutlined
 } from '@ant-design/icons-vue'
 import { reactive, toRefs, defineComponent } from 'vue'
-import { api } from '@/api/api'
+import api from '@/api/api.ts'
 import dictObj from './config'
 import CustomForm from '@/components/CustomForm.vue'
 export default defineComponent({
@@ -317,7 +317,7 @@ export default defineComponent({
   methods: {
     async getDictItemList() {
       this.userLoading = true
-      const res: any = await api.get(this.url.dictItem, 'empty')
+      const res: any = await api.get(this.url.dictItem)
       if (res.success) {
         const result = res.result
         this.userLoading = false
@@ -371,5 +371,5 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-@import '../../assets/sass/common.scss';
+@import "../../assets/sass/common.scss";
 </style>

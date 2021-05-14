@@ -1,5 +1,5 @@
 
-import { api } from '@/api/api'
+import api from '@/api/api.ts'
 import { message } from 'ant-design-vue'
 import { reactive, toRefs } from 'vue'
 export default function getList(obj) {
@@ -71,19 +71,19 @@ export default function getList(obj) {
 		}
 		const param: any = Object.assign(sqp, dataParams.queryParam, dataParams.isorter, dataParams.filters)
 		param.field = getQueryField()
-		param.pageNo = dataParams.ipagination.current
+		param.pageNow = dataParams.ipagination.current
 		param.pageSize = dataParams.ipagination.pageSize
 		return filterObj(param)
 	}
 
 	const getListF = async () => {
 		const params = getQueryParams() // 查询条件
-		const res: any = await api.get(obj.url.list, 'empty', params)
-		if (res.success) {
-			dataParams.dataSource = res.result.records
-			dataParams.ipagination.total = res.result.total
+		const res: any = await api.get(obj.url.list, params, 'empty')
+		if (res.code === 200) {
+			dataParams.dataSource = res.data.list
+			dataParams.ipagination.total = res.data.total
 		}
-		if (res.code === 510) {
+		if (res.code !== 200) {
 			message.warning(res.message)
 		}
 		dataParams.loading = false

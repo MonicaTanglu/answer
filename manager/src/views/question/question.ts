@@ -9,20 +9,21 @@ export default {
 			return t.index + 1
 		},
 	}, {
-		title: '名称',
-		dataIndex: 'name'
+		title: '标题',
+		dataIndex: 'title'
 	}, {
 		title: '分类',
 		dataIndex: 'category'
-	}, {
-		title: '提醒',
-		dataIndex: 'type'
-	}, {
+	},
+	// {
+	// 	title: '提醒',
+	// 	dataIndex: 'type'
+	// }, 
+	{
 		title: '操作',
 		dataIndex: 'action',
-		fixed: 'right',
 		width: 180,
 		slots: { customRender: 'action' },
 		align: 'center'
-	},]
+	}]
 }

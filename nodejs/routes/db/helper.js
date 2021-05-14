@@ -59,8 +59,22 @@ module.exports = {
             })
         })
     },
-    find: (table) => {
-        let sql = `select * from ${table} limit 0,20`
+    find: (page, table) => {
+        let startIndex = (page.pageNow - 1) * page.pageSize
+        let sql = `select * from ${table} limit ${startIndex},${page.pageSize}`
+        let sqlCount = `select count(1) from ${table}`
+        return new Promise((resolve, reject) => {
+            db.query(sql, res => {
+                db.query(sqlCount, countRes => {
+                    let data = { data: { list: res.data, total: countRes.data[0]['count(1)'], pageNow: page.pageNow }, code: res.code }
+                    resolve(data)
+                })
+                // resolve(res)
+            })
+        })
+    },
+    findAll: (table) => {
+        let sql = `select * from ${table}`
         return new Promise((resolve, reject) => {
             db.query(sql, res => {
                 resolve(res)
